@@ -57,3 +57,34 @@ export const ICON = {
   NAV_ITEM_HORIZONTAL: 22,
   NAV_ITEM_MINI: 22,
 };
+
+export const SOCIALS = [
+  {
+    value: 'facebook',
+    name: 'FaceBook',
+    icon: 'eva:facebook-fill',
+    color: '#1877F2',
+    path: '',
+  },
+  {
+    value: 'instagram',
+    name: 'Instagram',
+    icon: 'ant-design:instagram-filled',
+    color: '#E02D69',
+    path: '',
+  },
+  {
+    value: 'linkedin',
+    name: 'Linkedin',
+    icon: 'eva:linkedin-fill',
+    color: '#007EBB',
+    path: '',
+  },
+  {
+    value: 'twitter',
+    name: 'Twitter',
+    icon: 'eva:twitter-fill',
+    color: '#00AAEC',
+    path: 'https://twitter.com/myty_official?s=20',
+  },
+];
