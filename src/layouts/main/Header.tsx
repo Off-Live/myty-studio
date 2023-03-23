@@ -2,6 +2,7 @@
 import { useTheme } from '@mui/material/styles';
 import { Box, Button, AppBar, Toolbar, Container, Link, BoxProps } from '@mui/material';
 // hooks
+import MYTYStudioLogo from 'src/components/logo/MYTYStudioLogo';
 import useOffSetTop from '../../hooks/useOffSetTop';
 import useResponsive from '../../hooks/useResponsive';
 // utils
@@ -11,13 +12,11 @@ import { HEADER } from '../../config-global';
 // routes
 import { PATH_DOCS, PATH_MINIMAL_ON_STORE } from '../../routes/paths';
 // components
-import Logo from '../../components/logo';
 import Label from '../../components/label';
 //
 import NavMobile from './nav/mobile';
 import navConfig from './nav/config-navigation';
 import NavDesktop from './nav/desktop';
-import MYTYStudioLogo from 'src/components/logo/MYTYStudioLogo';
 
 // ----------------------------------------------------------------------
 

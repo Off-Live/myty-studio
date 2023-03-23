@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 // next
 import { useRouter } from 'next/router';
 // @mui
@@ -9,7 +9,6 @@ import useActiveLink from '../../../../hooks/useActiveLink';
 import { NavItemProps } from '../types';
 import { NavItem, NavItemDashboard } from './NavItem';
 import { StyledSubheader, StyledMenu } from './styles';
-import { ReactJSXElement } from '@emotion/react/types/jsx-namespace';
 
 // ----------------------------------------------------------------------
 
@@ -44,12 +43,12 @@ export default function NavList({ item, isOffset }: NavListProps) {
   return (
     <>
       {item.tooltipText ? (
-        <Tooltip title={item.tooltipText} arrow={true} style={{ cursor: 'pointer' }}>
+        <Tooltip title={item.tooltipText} arrow style={{ cursor: 'pointer' }}>
           <span>
             <NavItem
               item={item}
               isOffset={isOffset}
-              disabled={item.disable ? true : false}
+              disabled={!!item.disable}
               active={active}
               open={openMenu}
               isExternalLink={isExternalLink}
