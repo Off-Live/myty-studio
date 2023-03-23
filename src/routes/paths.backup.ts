@@ -32,11 +32,6 @@ export const PATH_PAGE = {
   page404: '/404',
   page500: '/500',
   components: '/components',
-
-  home: '/',
-  registration: '/registration',
-  dashboard: '/dashboard',
-  documentation: '/documentation',
 };
 
 export const PATH_DASHBOARD = {
@@ -103,7 +98,7 @@ export const PATH_DASHBOARD = {
 };
 
 export const PATH_DOCS = {
-  root: 'https://myty.gitbook.io/myty-kit/before-you-begin/gm-myty',
+  root: 'https://docs.minimals.cc',
   changelog: 'https://github.com/Off-Live/myty-kit/releases',
 };
 

@@ -1,14 +1,15 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 // next
 import { useRouter } from 'next/router';
 // @mui
-import { Stack, Fade, Portal } from '@mui/material';
+import { Stack, Fade, Portal, Tooltip } from '@mui/material';
 // hooks
 import useActiveLink from '../../../../hooks/useActiveLink';
 //
 import { NavItemProps } from '../types';
 import { NavItem, NavItemDashboard } from './NavItem';
 import { StyledSubheader, StyledMenu } from './styles';
+import { ReactJSXElement } from '@emotion/react/types/jsx-namespace';
 
 // ----------------------------------------------------------------------
 
@@ -19,11 +20,8 @@ type NavListProps = {
 
 export default function NavList({ item, isOffset }: NavListProps) {
   const { pathname } = useRouter();
-
   const [openMenu, setOpenMenu] = useState(false);
-
   const { path, children } = item;
-
   const { active, isExternalLink } = useActiveLink(path, false);
 
   useEffect(() => {
@@ -45,16 +43,32 @@ export default function NavList({ item, isOffset }: NavListProps) {
 
   return (
     <>
-      <NavItem
-        item={item}
-        isOffset={isOffset}
-        active={active}
-        open={openMenu}
-        isExternalLink={isExternalLink}
-        onMouseEnter={handleOpenMenu}
-        onMouseLeave={handleCloseMenu}
-      />
-
+      {item.tooltipText ? (
+        <Tooltip title={item.tooltipText} arrow={true} style={{ cursor: 'pointer' }}>
+          <span>
+            <NavItem
+              item={item}
+              isOffset={isOffset}
+              disabled={item.disable ? true : false}
+              active={active}
+              open={openMenu}
+              isExternalLink={isExternalLink}
+              onMouseEnter={handleOpenMenu}
+              onMouseLeave={handleCloseMenu}
+            />
+          </span>
+        </Tooltip>
+      ) : (
+        <NavItem
+          item={item}
+          isOffset={isOffset}
+          active={active}
+          open={openMenu}
+          isExternalLink={isExternalLink}
+          onMouseEnter={handleOpenMenu}
+          onMouseLeave={handleCloseMenu}
+        />
+      )}
       {!!children && openMenu && (
         <Portal>
           <Fade in={openMenu}>

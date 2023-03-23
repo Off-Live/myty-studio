@@ -17,7 +17,6 @@ import Label from '../../components/label';
 import NavMobile from './nav/mobile';
 import navConfig from './nav/config-navigation';
 import NavDesktop from './nav/desktop';
-import MYTYStudioLogo from 'src/components/logo/MYTYStudioLogo';
 
 // ----------------------------------------------------------------------
 
@@ -50,7 +49,7 @@ export default function Header() {
         }}
       >
         <Container sx={{ height: 1, display: 'flex', alignItems: 'center' }}>
-          <MYTYStudioLogo />
+          <Logo />
 
           <Link
             href={PATH_DOCS.changelog}
@@ -59,15 +58,15 @@ export default function Header() {
             underline="none"
             sx={{ ml: 1 }}
           >
-            <Label color="info"> v1.1.0 </Label>
+            <Label color="info"> v4.3.0 </Label>
           </Link>
 
           <Box sx={{ flexGrow: 1 }} />
 
-          {isDesktop && <NavDesktop isOffset={false} data={navConfig} />}
+          {isDesktop && <NavDesktop isOffset={isOffset} data={navConfig} />}
 
           <Button variant="contained" target="_blank" rel="noopener" href={PATH_MINIMAL_ON_STORE}>
-            Connect
+            Purchase Now
           </Button>
 
           {!isDesktop && <NavMobile isOffset={isOffset} data={navConfig} />}

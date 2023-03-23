@@ -17,11 +17,9 @@ import Label from '../../components/label';
 import NavMobile from './nav/mobile';
 import navConfig from './nav/config-navigation';
 import NavDesktop from './nav/desktop';
-import MYTYStudioLogo from 'src/components/logo/MYTYStudioLogo';
 
 // ----------------------------------------------------------------------
-
-export default function Header() {
+const MYTYStudioHeader = () => {
   const theme = useTheme();
 
   const isDesktop = useResponsive('up', 'md');
@@ -50,7 +48,7 @@ export default function Header() {
         }}
       >
         <Container sx={{ height: 1, display: 'flex', alignItems: 'center' }}>
-          <MYTYStudioLogo />
+          <Logo />
 
           <Link
             href={PATH_DOCS.changelog}
@@ -59,15 +57,15 @@ export default function Header() {
             underline="none"
             sx={{ ml: 1 }}
           >
-            <Label color="info"> v1.1.0 </Label>
+            <Label color="info"> v4.3.0 </Label>
           </Link>
 
           <Box sx={{ flexGrow: 1 }} />
 
-          {isDesktop && <NavDesktop isOffset={false} data={navConfig} />}
+          {isDesktop && <NavDesktop isOffset={isOffset} data={navConfig} />}
 
           <Button variant="contained" target="_blank" rel="noopener" href={PATH_MINIMAL_ON_STORE}>
-            Connect
+            Purchase Now
           </Button>
 
           {!isDesktop && <NavMobile isOffset={isOffset} data={navConfig} />}
@@ -77,27 +75,4 @@ export default function Header() {
       {isOffset && <Shadow />}
     </AppBar>
   );
-}
-
-// ----------------------------------------------------------------------
-
-function Shadow({ sx, ...other }: BoxProps) {
-  return (
-    <Box
-      sx={{
-        left: 0,
-        right: 0,
-        bottom: 0,
-        height: 24,
-        zIndex: -1,
-        m: 'auto',
-        borderRadius: '50%',
-        position: 'absolute',
-        width: `calc(100% - 48px)`,
-        boxShadow: (theme) => theme.customShadows.z8,
-        ...sx,
-      }}
-      {...other}
-    />
-  );
-}
+};

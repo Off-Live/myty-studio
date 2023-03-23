@@ -30,8 +30,12 @@ export default function HomePage() {
   return (
     <>
       <Head>
-        <title> MYTY STUDIO </title>
+        <title> The starting point for your next project | Minimal UI</title>
       </Head>
+
+      <ScrollProgress />
+
+      <HomeHero />
 
       <Box
         sx={{

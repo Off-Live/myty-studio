@@ -3,7 +3,7 @@ import { forwardRef } from 'react';
 // next
 import NextLink from 'next/link';
 // @mui
-import { Link, LinkProps, CardActionArea } from '@mui/material';
+import { Link, LinkProps, CardActionArea, Tooltip } from '@mui/material';
 // components
 import Image from '../../../../components/image';
 import Iconify from '../../../../components/iconify';
@@ -32,6 +32,8 @@ export const NavItem = forwardRef<HTMLDivElement, NavItemDesktopProps>(
         {!!children && <Iconify width={16} icon="eva:arrow-ios-downward-fill" sx={{ ml: 1 }} />}
       </ListItem>
     );
+
+    if (item.disable) return renderContent;
 
     // ExternalLink
     if (isExternalLink) {

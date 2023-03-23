@@ -13,6 +13,8 @@ export type NavItemProps = {
       path: string;
     }[];
   }[];
+  disable?: boolean;
+  tooltipText?: string;
 };
 
 export interface NavItemDesktopProps extends ListItemButtonProps {
