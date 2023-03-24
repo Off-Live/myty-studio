@@ -3,6 +3,7 @@ import { useTheme } from '@mui/material/styles';
 import { Box, Button, AppBar, Toolbar, Container, Link, BoxProps } from '@mui/material';
 // hooks
 import MYTYStudioLogo from 'src/components/logo/MYTYStudioLogo';
+import { ConnectButton } from '@rainbow-me/rainbowkit';
 import useOffSetTop from '../../hooks/useOffSetTop';
 import useResponsive from '../../hooks/useResponsive';
 // utils
@@ -65,9 +66,10 @@ export default function Header() {
 
           {isDesktop && <NavDesktop isOffset={false} data={navConfig} />}
 
-          <Button variant="contained" target="_blank" rel="noopener" href={PATH_MINIMAL_ON_STORE}>
+          {/* <Button variant="contained" target="_blank" rel="noopener" href={PATH_MINIMAL_ON_STORE}>
             Connect
-          </Button>
+          </Button> */}
+          <ConnectButton />
 
           {!isDesktop && <NavMobile isOffset={isOffset} data={navConfig} />}
         </Container>

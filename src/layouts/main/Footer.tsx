@@ -5,8 +5,10 @@ import { useRouter } from 'next/router';
 import { Box, Grid, Link, Stack, Divider, Container, Typography, IconButton } from '@mui/material';
 // components
 import MYTYStudioLogo from 'src/components/logo/MYTYStudioLogo';
-import { SOCIALS } from 'src/config-global';
-import Logo from '../../components/logo';
+import { HEADER, SOCIALS } from 'src/config-global';
+import useOffSetTop from 'src/hooks/useOffSetTop';
+import useResponsive from 'src/hooks/useResponsive';
+import { theme } from 'antd';
 import Iconify from '../../components/iconify';
 
 // ----------------------------------------------------------------------
@@ -36,27 +38,49 @@ const LINKS = [
 
 export default function Footer() {
   const { pathname } = useRouter();
-
   const isHome = pathname === '/';
+  const isDesktop = useResponsive('up', 'md');
 
   const simpleFooter = (
     <Box
       component="footer"
       sx={{
         py: 5,
-        textAlign: 'center',
         position: 'relative',
         bgcolor: 'background.default',
       }}
     >
       <Container>
-        <Logo sx={{ mb: 1, mx: 'auto' }} />
-
-        <Typography variant="caption" component="div">
-          © All rights reserved
-          <br /> made by &nbsp;
-          <Link href="https://minimals.cc/"> minimals.cc </Link>
-        </Typography>
+        <Stack
+          spacing={1}
+          direction="column"
+          justifyContent={{ xs: 'center', md: 'flex-start' }}
+          sx={{
+            mt: 5,
+            mb: { xs: 5, md: 0 },
+          }}
+        >
+          <Stack direction="row" justifyContent={{ xs: 'center', md: 'space-between' }}>
+            <MYTYStudioLogo />
+            {isDesktop && (
+              <Stack direction="row">
+                {SOCIALS.map((social) => (
+                  <IconButton key={social.name}>
+                    <Iconify icon={social.icon} />
+                  </IconButton>
+                ))}
+              </Stack>
+            )}
+          </Stack>
+          <Typography
+            variant="caption"
+            component="div"
+            style={{ margin: '0' }}
+            textAlign={{ xs: 'center', md: 'left' }}
+          >
+            © All rights reserved
+          </Typography>
+        </Stack>
       </Container>
     </Box>
   );
@@ -152,5 +176,5 @@ export default function Footer() {
     </Box>
   );
 
-  return !isHome ? simpleFooter : mainFooter;
+  return isHome ? simpleFooter : mainFooter;
 }
