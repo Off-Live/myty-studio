@@ -35,6 +35,7 @@ import { Provider as ReduxProvider } from 'react-redux';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 // redux
+import RainbowWalletProvider from 'src/wallet/RainbowWalletProvider';
 import { store } from '../redux/store';
 // utils
 import createEmotionCache from '../utils/createEmotionCache';
@@ -89,11 +90,13 @@ export default function MyApp(props: MyAppProps) {
                 <ThemeProvider>
                   <ThemeSettings>
                     <ThemeLocalization>
-                      <SnackbarProvider>
-                        <StyledChart />
-                        <ProgressBar />
-                        {getLayout(<Component {...pageProps} />)}
-                      </SnackbarProvider>
+                      <RainbowWalletProvider>
+                        <SnackbarProvider>
+                          <StyledChart />
+                          <ProgressBar />
+                          {getLayout(<Component {...pageProps} />)}
+                        </SnackbarProvider>
+                      </RainbowWalletProvider>
                     </ThemeLocalization>
                   </ThemeSettings>
                 </ThemeProvider>
