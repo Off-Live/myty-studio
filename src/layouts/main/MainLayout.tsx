@@ -31,7 +31,7 @@ export default function MainLayout({ children }: Props) {
           }),
         }}
       >
-        {/* {children} */}
+        {children}
       </Box>
 
       <Footer />

@@ -5,10 +5,8 @@ import { useRouter } from 'next/router';
 import { Box, Grid, Link, Stack, Divider, Container, Typography, IconButton } from '@mui/material';
 // components
 import MYTYStudioLogo from 'src/components/logo/MYTYStudioLogo';
-import { HEADER, SOCIALS } from 'src/config-global';
-import useOffSetTop from 'src/hooks/useOffSetTop';
+import { SOCIALS } from 'src/config-global';
 import useResponsive from 'src/hooks/useResponsive';
-import { theme } from 'antd';
 import Iconify from '../../components/iconify';
 
 // ----------------------------------------------------------------------
@@ -50,6 +48,7 @@ export default function Footer() {
         bgcolor: 'background.default',
       }}
     >
+      <Divider />
       <Container>
         <Stack
           spacing={1}

@@ -3,10 +3,10 @@ import Head from 'next/head';
 // @mui
 import { Box } from '@mui/material';
 // layouts
+import MYTYStudoHome from 'src/sections/home/MYTYStudioHome';
 import MainLayout from '../layouts/main';
 // components
 import ScrollProgress from '../components/scroll-progress';
-// sections
 import {
   HomeHero,
   HomeMinimal,
@@ -40,23 +40,7 @@ export default function HomePage() {
           bgcolor: 'background.default',
         }}
       >
-        <HomeMinimal />
-
-        <HomeHugePackElements />
-
-        <HomeForDesigner />
-
-        <HomeDarkMode />
-
-        <HomeColorPresets />
-
-        <HomeCleanInterfaces />
-
-        <HomePricingPlans />
-
-        <HomeLookingFor />
-
-        <HomeAdvertisement />
+        <MYTYStudoHome />
       </Box>
     </>
   );
