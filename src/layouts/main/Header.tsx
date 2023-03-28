@@ -1,6 +1,6 @@
 // @mui
 import { useTheme } from '@mui/material/styles';
-import { Box, Button, AppBar, Toolbar, Container, Link, BoxProps } from '@mui/material';
+import { Box, AppBar, Toolbar, Container, Link, BoxProps } from '@mui/material';
 // hooks
 import MYTYStudioLogo from 'src/components/logo/MYTYStudioLogo';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
@@ -11,7 +11,7 @@ import { bgBlur } from '../../utils/cssStyles';
 // config
 import { HEADER } from '../../config-global';
 // routes
-import { PATH_DOCS, PATH_MINIMAL_ON_STORE } from '../../routes/paths';
+import { PATH_DOCS } from '../../routes/paths';
 // components
 import Label from '../../components/label';
 //
@@ -23,9 +23,7 @@ import NavDesktop from './nav/desktop';
 
 export default function Header() {
   const theme = useTheme();
-
   const isDesktop = useResponsive('up', 'md');
-
   const isOffset = useOffSetTop(HEADER.H_MAIN_DESKTOP);
 
   return (
@@ -66,9 +64,6 @@ export default function Header() {
 
           {isDesktop && <NavDesktop isOffset={false} data={navConfig} />}
 
-          {/* <Button variant="contained" target="_blank" rel="noopener" href={PATH_MINIMAL_ON_STORE}>
-            Connect
-          </Button> */}
           <ConnectButton />
 
           {!isDesktop && <NavMobile isOffset={isOffset} data={navConfig} />}

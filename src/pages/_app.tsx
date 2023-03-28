@@ -23,7 +23,6 @@ import 'slick-carousel/slick/slick-theme.css';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 
 // ----------------------------------------------------------------------
-
 import { CacheProvider, EmotionCache } from '@emotion/react';
 // next
 import { NextPage } from 'next';
@@ -36,6 +35,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 // redux
 import RainbowWalletProvider from 'src/wallet/RainbowWalletProvider';
+import { SessionProvider } from 'next-auth/react';
 import { store } from '../redux/store';
 // utils
 import createEmotionCache from '../utils/createEmotionCache';
@@ -90,13 +90,15 @@ export default function MyApp(props: MyAppProps) {
                 <ThemeProvider>
                   <ThemeSettings>
                     <ThemeLocalization>
-                      <RainbowWalletProvider>
-                        <SnackbarProvider>
-                          <StyledChart />
-                          <ProgressBar />
-                          {getLayout(<Component {...pageProps} />)}
-                        </SnackbarProvider>
-                      </RainbowWalletProvider>
+                      <SessionProvider refetchInterval={0} session={pageProps.session}>
+                        <RainbowWalletProvider>
+                          <SnackbarProvider>
+                            <StyledChart />
+                            <ProgressBar />
+                            {getLayout(<Component {...pageProps} />)}
+                          </SnackbarProvider>
+                        </RainbowWalletProvider>
+                      </SessionProvider>
                     </ThemeLocalization>
                   </ThemeSettings>
                 </ThemeProvider>
