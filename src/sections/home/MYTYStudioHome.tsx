@@ -2,9 +2,24 @@ import { Box, Button, Container, Grid, Typography, styled } from '@mui/material'
 import React from 'react';
 import CardWithButton, { CardWithButtonProps } from 'src/pages/card/CardWithButton';
 import Iconify from 'src/components/iconify/Iconify';
-import { Stack } from '@mui/system';
+import { Stack, alpha } from '@mui/system';
 import useResponsive from 'src/hooks/useResponsive';
+import { bgGradient } from 'src/utils/cssStyles';
 import { StyledRoot } from '../styles/StyledRoot';
+
+const StyledBg = styled('div')(({ theme }) => ({
+  top: 0,
+  left: 0,
+  right: 0,
+  bottom: 0,
+  zIndex: -1,
+  position: 'absolute',
+  transform: 'scaleX(-1)',
+  ...bgGradient({
+    color: alpha(theme.palette.background.default, theme.palette.mode === 'light' ? 0.9 : 0.94),
+    imgUrl: '/assets/background/overlay_2.jpg',
+  }),
+}));
 
 const CARD_WITH_BUTTONS: CardWithButtonProps[] = [
   {
@@ -43,14 +58,13 @@ const CARD_WITH_BUTTONS: CardWithButtonProps[] = [
 
 const Title = styled(Typography)``;
 const Description = styled(Typography)``;
-const BGContainer = styled(Container)``;
 
 const MYTYStudioHome = () => {
   const isDesktop = useResponsive('up', 'md');
   const isXS = useResponsive('down', 'sm');
   return (
     <StyledRoot>
-      <BGContainer>
+      <Container>
         <Grid container justifyContent="space-between">
           <Grid item xs={isDesktop ? 7.5 : 12}>
             <Stack spacing={2}>
@@ -87,7 +101,8 @@ const MYTYStudioHome = () => {
             </Grid>
           )}
         </Grid>
-      </BGContainer>
+      </Container>
+      <StyledBg />
     </StyledRoot>
   );
 };

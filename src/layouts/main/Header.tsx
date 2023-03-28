@@ -70,7 +70,7 @@ export default function Header() {
         </Container>
       </Toolbar>
 
-      {isOffset && <Shadow />}
+      <Shadow />
     </AppBar>
   );
 }
