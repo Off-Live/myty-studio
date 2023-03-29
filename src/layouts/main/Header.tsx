@@ -4,6 +4,7 @@ import { Box, AppBar, Toolbar, Container, Link, BoxProps } from '@mui/material';
 // hooks
 import MYTYStudioLogo from 'src/components/logo/MYTYStudioLogo';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
+import WalletButton from 'src/components/buttons/WalletButton';
 import useOffSetTop from '../../hooks/useOffSetTop';
 import useResponsive from '../../hooks/useResponsive';
 // utils
@@ -64,7 +65,7 @@ export default function Header() {
 
           {isDesktop && <NavDesktop isOffset={false} data={navConfig} />}
 
-          <ConnectButton />
+          <WalletButton showBalance={false} chainStatus="name" />
 
           {!isDesktop && <NavMobile isOffset={isOffset} data={navConfig} />}
         </Container>
