@@ -1,10 +1,10 @@
-import NextAuth from 'next-auth';
+import NextAuth, { NextAuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import { getCsrfToken } from 'next-auth/react';
 import { SiweMessage } from 'siwe';
 
-export default async function auth(req: any, res: any) {
-  const providers = [
+export const authOptions: NextAuthOptions = {
+  providers: [
     CredentialsProvider({
       name: 'Ethereum',
       credentials: {
@@ -19,7 +19,7 @@ export default async function auth(req: any, res: any) {
           placeholder: '0x0',
         },
       },
-      async authorize(credentials) {
+      async authorize(credentials, req: any) {
         try {
           const siwe = new SiweMessage(JSON.parse(credentials?.message || '{}'));
           if (!process.env.NEXTAUTH_URL) {
@@ -44,30 +44,30 @@ export default async function auth(req: any, res: any) {
         }
       },
     }),
-  ];
+  ],
+  session: {
+    strategy: 'jwt',
+  },
+  secret: process.env.NEXTAUTH_SECRET,
+  callbacks: {
+    async session({ session, token }: { session: any; token: any }) {
+      session.address = token.sub;
+      session.user.name = token.sub;
+      session.user.email = token.sub;
+      session.user.image = 'https://www.fillmurray.com/128/128';
+      return session;
+    },
+  },
+};
 
+export default async function auth(req: any, res: any) {
   const isDefaultSigninPage = req.method === 'GET' && req.query.nextauth.includes('signin');
 
   // Hide Sign-In with Ethereum from default sign page
   if (isDefaultSigninPage) {
-    providers.pop();
+    authOptions.providers.pop();
   }
 
   // eslint-disable-next-line @typescript-eslint/return-await
-  return await NextAuth(req, res, {
-    // https://next-auth.js.org/configuration/providers/oauth
-    providers,
-    session: {
-      strategy: 'jwt',
-    },
-    secret: process.env.NEXTAUTH_SECRET,
-    callbacks: {
-      async session({ session, token }: { session: any; token: any }) {
-        session.address = token.sub;
-        session.user.name = token.sub;
-        session.user.image = 'https://www.fillmurray.com/128/128';
-        return session;
-      },
-    },
-  });
+  return await NextAuth(req, res, authOptions);
 }

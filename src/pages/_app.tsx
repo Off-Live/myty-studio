@@ -50,16 +50,6 @@ import SnackbarProvider from '../components/snackbar';
 import { MotionLazyContainer } from '../components/animate';
 import { ThemeSettings, SettingsProvider } from '../components/settings';
 
-// Check our docs
-// https://docs.minimals.cc/authentication/ts-version
-
-import { AuthProvider } from '../auth/JwtContext';
-// import { AuthProvider } from '../auth/Auth0Context';
-// import { AuthProvider } from '../auth/FirebaseContext';
-// import { AuthProvider } from '../auth/AwsCognitoContext';
-
-// ----------------------------------------------------------------------
-
 const clientSideEmotionCache = createEmotionCache();
 
 type NextPageWithLayout = NextPage & {
@@ -81,32 +71,29 @@ export default function MyApp(props: MyAppProps) {
       <Head>
         <meta name="viewport" content="initial-scale=1, width=device-width" />
       </Head>
-
-      <AuthProvider>
-        <ReduxProvider store={store}>
-          <LocalizationProvider dateAdapter={AdapterDateFns}>
-            <SettingsProvider>
-              <MotionLazyContainer>
-                <ThemeProvider>
-                  <ThemeSettings>
-                    <ThemeLocalization>
-                      <SessionProvider refetchInterval={0} session={pageProps.session}>
-                        <RainbowWalletProvider>
-                          <SnackbarProvider>
-                            <StyledChart />
-                            <ProgressBar />
-                            {getLayout(<Component {...pageProps} />)}
-                          </SnackbarProvider>
-                        </RainbowWalletProvider>
-                      </SessionProvider>
-                    </ThemeLocalization>
-                  </ThemeSettings>
-                </ThemeProvider>
-              </MotionLazyContainer>
-            </SettingsProvider>
-          </LocalizationProvider>
-        </ReduxProvider>
-      </AuthProvider>
+      <SessionProvider refetchInterval={0} session={pageProps.session}>
+        <RainbowWalletProvider>
+          <ReduxProvider store={store}>
+            <LocalizationProvider dateAdapter={AdapterDateFns}>
+              <SettingsProvider>
+                <MotionLazyContainer>
+                  <ThemeProvider>
+                    <ThemeSettings>
+                      <ThemeLocalization>
+                        <SnackbarProvider>
+                          <StyledChart />
+                          <ProgressBar />
+                          {getLayout(<Component {...pageProps} />)}
+                        </SnackbarProvider>
+                      </ThemeLocalization>
+                    </ThemeSettings>
+                  </ThemeProvider>
+                </MotionLazyContainer>
+              </SettingsProvider>
+            </LocalizationProvider>
+          </ReduxProvider>
+        </RainbowWalletProvider>
+      </SessionProvider>
     </CacheProvider>
   );
 }
