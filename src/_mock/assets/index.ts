@@ -7,3 +7,4 @@ export * from './address';
 export * from './boolean';
 export * from './company';
 export * from './phoneNumber';
+export * from './my-collections-dashboard-items';
