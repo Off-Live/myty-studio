@@ -26,10 +26,18 @@ const visuallyHidden = {
 
 // ----------------------------------------------------------------------
 
-type Props = {
+export type TableHeadLabel = {
+  label: string;
+  id: string;
+  align?: 'left' | 'right' | 'center' | 'justify' | 'inherit';
+  width?: number;
+  minWidth?: number;
+};
+
+export type TableHeadCustomProps = {
   order?: 'asc' | 'desc';
   orderBy?: string;
-  headLabel: any[];
+  headLabel: TableHeadLabel[];
   rowCount?: number;
   numSelected?: number;
   onSort?: (id: string) => void;
@@ -46,7 +54,7 @@ export default function TableHeadCustom({
   onSort,
   onSelectAllRows,
   sx,
-}: Props) {
+}: TableHeadCustomProps) {
   return (
     <TableHead sx={sx}>
       <TableRow>

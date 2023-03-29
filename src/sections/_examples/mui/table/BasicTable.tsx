@@ -1,6 +1,7 @@
 // @mui
 import { Table, TableRow, TableBody, TableCell, TableContainer } from '@mui/material';
 // components
+import { TableHeadLabel } from 'src/components/table/TableHeadCustom';
 import Scrollbar from '../../../../components/scrollbar';
 import { TableHeadCustom } from '../../../../components/table';
 
@@ -18,7 +19,7 @@ const TABLE_DATA = [
   createData('Gingerbread', 356, 16.0, 49, 3.9),
 ];
 
-const TABLE_HEAD = [
+const TABLE_HEAD: TableHeadLabel[] = [
   { id: 'dessert', label: 'Dessert (100g serving)' },
   { id: 'calories', label: 'Calories', align: 'right' },
   { id: 'fat', label: 'Fat (g)', align: 'right' },
