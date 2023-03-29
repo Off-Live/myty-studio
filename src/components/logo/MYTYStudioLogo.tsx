@@ -5,8 +5,6 @@ import NextLink from 'next/link';
 import { useTheme } from '@mui/material/styles';
 import { Box, Link, BoxProps } from '@mui/material';
 
-// ----------------------------------------------------------------------
-
 export interface MYTYStudioLogoProps extends BoxProps {
   disabledLink?: boolean;
 }
