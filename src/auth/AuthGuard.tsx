@@ -2,20 +2,16 @@ import { useState, useEffect } from 'react';
 // next
 import { useRouter } from 'next/router';
 // components
+import { useSession } from 'next-auth/react';
+import WalletConnectionRequirement from 'src/sections/WalletConnectionRequirement';
 import LoadingScreen from '../components/loading-screen';
-//
-import Login from '../pages/auth/login';
-import { useAuthContext } from './useAuthContext';
-
-// ----------------------------------------------------------------------
 
 type AuthGuardProps = {
   children: React.ReactNode;
 };
 
 export default function AuthGuard({ children }: AuthGuardProps) {
-  const { isAuthenticated, isInitialized } = useAuthContext();
-
+  const { status } = useSession();
   const { pathname, push } = useRouter();
 
   const [requestedLocation, setRequestedLocation] = useState<string | null>(null);
@@ -24,20 +20,20 @@ export default function AuthGuard({ children }: AuthGuardProps) {
     if (requestedLocation && pathname !== requestedLocation) {
       push(requestedLocation);
     }
-    if (isAuthenticated) {
+    if (status === 'authenticated') {
       setRequestedLocation(null);
     }
-  }, [isAuthenticated, pathname, push, requestedLocation]);
+  }, [requestedLocation, pathname, setRequestedLocation, status, push]);
 
-  if (!isInitialized) {
+  if (status === 'loading') {
     return <LoadingScreen />;
   }
 
-  if (!isAuthenticated) {
+  if (status === 'unauthenticated') {
     if (pathname !== requestedLocation) {
       setRequestedLocation(pathname);
     }
-    return <Login />;
+    return <WalletConnectionRequirement />;
   }
 
   return <> {children} </>;
