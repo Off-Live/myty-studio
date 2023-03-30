@@ -3,7 +3,6 @@ import { useTheme } from '@mui/material/styles';
 import { Box, AppBar, Toolbar, Container, Link, BoxProps } from '@mui/material';
 // hooks
 import MYTYStudioLogo from 'src/components/logo/MYTYStudioLogo';
-import { ConnectButton } from '@rainbow-me/rainbowkit';
 import WalletButton from 'src/components/buttons/WalletButton';
 import useOffSetTop from '../../hooks/useOffSetTop';
 import useResponsive from '../../hooks/useResponsive';

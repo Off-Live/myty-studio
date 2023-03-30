@@ -1,28 +1,25 @@
-import React from 'react';
 import { AssetCollectionItems } from 'src/@types/assetCollection';
 import { Container } from '@mui/system';
 import {
   Box,
   Button,
   Stack,
-  Tab,
   Table,
   TableBody,
-  TableCell,
   TableContainer,
-  TableHead,
-  TableRow,
+  TablePagination,
   Typography,
+  styled,
 } from '@mui/material';
 import Iconify from 'src/components/iconify/Iconify';
-import { TableHeadCustom } from 'src/components/table';
+import { TableHeadCustom, useTable } from 'src/components/table';
 import { TableHeadCustomProps } from 'src/components/table/TableHeadCustom';
-import Image from 'next/image';
-import { LazyLoadImage } from 'react-lazy-load-image-component';
-import Label from 'src/components/label/Label';
-import TextMaxLine from 'src/components/text-max-line/TextMaxLine';
-import TextMathLength from 'src/components/text-max-length/TextMaxLength';
 import { StyledRoot } from '../styles/StyledRoot';
+import CollectionDashboardRow from './CollectionRow';
+
+const DashboardContainer = styled(Container)`
+  box-shadow: 0px 0px 2px rgba(145, 158, 171, 0.2), 0px 12px 24px -4px rgba(145, 158, 171, 0.12);
+`;
 
 type CollectionDashboardProps = {
   assetCollectionItems: AssetCollectionItems[];
@@ -32,68 +29,50 @@ type CollectionDashboardProps = {
 const CollectionDashboard = ({
   assetCollectionItems,
   tableHeaderProps,
-}: CollectionDashboardProps) => (
-  <StyledRoot>
-    <Container>
-      <Stack spacing={2.5} sx={{ my: 7.5 }} direction="column">
-        <Stack direction="row" justifyContent="space-between">
-          <Typography variant="h4">My Collections</Typography>
-          <Box>
-            <Button variant="contained" startIcon={<Iconify icon="eva:plus-fill" />}>
-              Add New
-            </Button>
-          </Box>
+}: CollectionDashboardProps) => {
+  const { page, rowsPerPage, onChangePage, onChangeRowsPerPage } = useTable({
+    defaultRowsPerPage: 5,
+  });
+  return (
+    <StyledRoot>
+      <Container
+        sx={{
+          boxShadow: `0px 10px 2px -10px rgba(145, 158, 171, 0.2), 0px 10px 24px -10px rgba(145, 158, 171, 0.12)`,
+        }}
+      >
+        <Stack spacing={2.5} sx={{ my: 7.5 }} direction="column">
+          <Stack direction="row" justifyContent="space-between">
+            <Typography variant="h4">My Collections</Typography>
+            <Box>
+              <Button variant="contained" startIcon={<Iconify icon="eva:plus-fill" />}>
+                Add New
+              </Button>
+            </Box>
+          </Stack>
+          <TableContainer>
+            <Table>
+              <TableHeadCustom {...tableHeaderProps} />
+              <TableBody>
+                {assetCollectionItems
+                  .slice(page * rowsPerPage, (page + 1) * rowsPerPage)
+                  .map((row) => (
+                    <CollectionDashboardRow row={row} />
+                  ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+          <TablePagination
+            count={assetCollectionItems.length}
+            page={page}
+            rowsPerPageOptions={[5, 10, 25, 50, 100]}
+            rowsPerPage={rowsPerPage}
+            onPageChange={onChangePage}
+            onRowsPerPageChange={onChangeRowsPerPage}
+          />
         </Stack>
-        <TableContainer>
-          <Table>
-            <TableHeadCustom {...tableHeaderProps} />
-            <TableBody>
-              {assetCollectionItems.map((row) => (
-                <TableRow key={`${row.avatarName}-${row.version}`}>
-                  <TableCell>
-                    <Stack direction="row" spacing={2}>
-                      <Box
-                        component="img"
-                        src="/assets/sample-avatar.svg"
-                        style={{ width: 40, height: 40 }}
-                      />
-                      <Stack>
-                        <TextMathLength variant="subtitle2" maxLength={10}>
-                          {row.avatarName}
-                        </TextMathLength>
-                        <Typography variant="body2">{row.creator}</Typography>
-                      </Stack>
-                    </Stack>
-                  </TableCell>
-                  <TableCell>{row.version}</TableCell>
-                  <TableCell>{row.linkedNFT}</TableCell>
-                  <TableCell>{row.supportedTokenType}</TableCell>
-                  <TableCell>{row.createdDate}</TableCell>
-                  <TableCell>
-                    <Stack direction="row" spacing={1}>
-                      {row.compatiblity.map((tag) => (
-                        <Label variant="soft" color="info">
-                          {tag}
-                        </Label>
-                      ))}
-                    </Stack>
-                  </TableCell>
-                  <TableCell>
-                    <Label variant="soft" color="secondary">
-                      {row.format}
-                    </Label>
-                  </TableCell>
-                  <TableCell>
-                    <Iconify icon="eva:more-vertical-fill" />
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      </Stack>
-    </Container>
-  </StyledRoot>
-);
+      </Container>
+    </StyledRoot>
+  );
+};
 
 export default CollectionDashboard;
