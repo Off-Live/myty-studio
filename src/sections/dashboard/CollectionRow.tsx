@@ -8,6 +8,7 @@ import {
   IconButton,
   Menu,
   MenuItem,
+  styled,
 } from '@mui/material';
 import { useCallback, useState } from 'react';
 import { AssetCollectionItems } from 'src/@types/assetCollection';
@@ -40,6 +41,10 @@ const MENU_ITEMS = [
   },
 ];
 
+const TableCellDefaultCursor = styled(TableCell)`
+  cursor: default;
+`;
+
 const CollectionDashboardRow = ({ row }: CollectionDashboardRowProp) => {
   const [isMenuOpen, setIsMenuOpen] = useState<HTMLElement | null>(null);
   const handleClick = useCallback(
@@ -50,7 +55,7 @@ const CollectionDashboardRow = ({ row }: CollectionDashboardRowProp) => {
 
   return (
     <TableRow key={`${row.avatarName}-${row.version}`}>
-      <TableCell>
+      <TableCellDefaultCursor>
         <Stack direction="row" spacing={2}>
           <Box component="img" src="/assets/sample-avatar.svg" style={{ width: 40, height: 40 }} />
           <Stack>
@@ -67,23 +72,23 @@ const CollectionDashboardRow = ({ row }: CollectionDashboardRowProp) => {
             </TextMathLength>
           </Stack>
         </Stack>
-      </TableCell>
-      <TableCell>{row.version}</TableCell>
-      <TableCell>
+      </TableCellDefaultCursor>
+      <TableCellDefaultCursor>{row.version}</TableCellDefaultCursor>
+      <TableCellDefaultCursor>
         <Tooltip title={row.collectionAdress} arrow>
           <Typography variant="inherit" sx={{ width: 'fit-content' }}>
             {row.linkedNFT}
           </Typography>
         </Tooltip>
-      </TableCell>
-      <TableCell>
+      </TableCellDefaultCursor>
+      <TableCellDefaultCursor>
         <Tooltip title={displayTokensToString(row.supportedTokenId)} arrow>
           <Typography variant="inherit" sx={{ width: 'fit-content' }}>
             {row.supportedTokenId.length}
           </Typography>
         </Tooltip>
-      </TableCell>
-      <TableCell>{row.createdDate}</TableCell>
+      </TableCellDefaultCursor>
+      <TableCellDefaultCursor>{row.createdDate}</TableCellDefaultCursor>
       <TableCell>
         <Stack direction="row" spacing={1}>
           {row.compatiblity.map((tag) => (

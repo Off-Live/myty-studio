@@ -9,17 +9,12 @@ import {
   TableContainer,
   TablePagination,
   Typography,
-  styled,
 } from '@mui/material';
 import Iconify from 'src/components/iconify/Iconify';
 import { TableHeadCustom, useTable } from 'src/components/table';
 import { TableHeadCustomProps } from 'src/components/table/TableHeadCustom';
 import { StyledRoot } from '../styles/StyledRoot';
 import CollectionDashboardRow from './CollectionRow';
-
-const DashboardContainer = styled(Container)`
-  box-shadow: 0px 0px 2px rgba(145, 158, 171, 0.2), 0px 12px 24px -4px rgba(145, 158, 171, 0.12);
-`;
 
 type CollectionDashboardProps = {
   assetCollectionItems: AssetCollectionItems[];
@@ -51,7 +46,7 @@ const CollectionDashboard = ({
           </Stack>
           <TableContainer>
             <Table>
-              <TableHeadCustom {...tableHeaderProps} />
+              <TableHeadCustom {...tableHeaderProps} sx={{ cursor: 'default' }} />
               <TableBody>
                 {assetCollectionItems
                   .slice(page * rowsPerPage, (page + 1) * rowsPerPage)

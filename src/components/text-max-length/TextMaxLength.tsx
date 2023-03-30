@@ -7,7 +7,7 @@ const TextMathLength = forwardRef<HTMLAnchorElement, TextMathLengthProps>(
     const childrenString = children?.toString().slice(0, maxLength).concat('...');
     return (
       <Tooltip arrow {...other.tooltipProps} title={children?.toString()}>
-        <Typography ref={ref} variant={variant} {...other}>
+        <Typography ref={ref} variant={variant} {...other} sx={sx}>
           {childrenString}
         </Typography>
       </Tooltip>
