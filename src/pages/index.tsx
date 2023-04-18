@@ -5,20 +5,6 @@ import { Box } from '@mui/material';
 // layouts
 import MYTYStudoHome from 'src/sections/home/MYTYStudioHome';
 import MainLayout from '../layouts/main';
-// components
-import ScrollProgress from '../components/scroll-progress';
-import {
-  HomeHero,
-  HomeMinimal,
-  HomeDarkMode,
-  HomeLookingFor,
-  HomeForDesigner,
-  HomeColorPresets,
-  HomePricingPlans,
-  HomeAdvertisement,
-  HomeCleanInterfaces,
-  HomeHugePackElements,
-} from '../sections/home';
 
 // ----------------------------------------------------------------------
 

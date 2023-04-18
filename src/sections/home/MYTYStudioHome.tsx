@@ -1,10 +1,11 @@
 import { Box, Button, Container, Grid, Typography, styled } from '@mui/material';
-import React from 'react';
-import CardWithButton, { CardWithButtonProps } from 'src/pages/card/CardWithButton';
+import React, { useMemo } from 'react';
+import CardWithButton, { CardWithButtonProps } from 'src/components/buttons/CardWithButton';
 import Iconify from 'src/components/iconify/Iconify';
 import { Stack, alpha } from '@mui/system';
 import useResponsive from 'src/hooks/useResponsive';
 import { bgGradient } from 'src/utils/cssStyles';
+import { useRouter } from 'next/router';
 import { StyledRoot } from '../styles/StyledRoot';
 
 const StyledBg = styled('div')(({ theme }) => ({
@@ -21,45 +22,53 @@ const StyledBg = styled('div')(({ theme }) => ({
   }),
 }));
 
-const CARD_WITH_BUTTONS: CardWithButtonProps[] = [
-  {
-    title: 'Create',
-    logoPath: '/assets/icons/brush-filled.svg',
-    button: (
-      <Button variant="soft" endIcon={<Iconify icon="eva:external-link-fill" />}>
-        Learn How
-      </Button>
-    ),
-    description: `Learn how to create
-                2D &  3D avatars
-                for MYTY Metaverse`,
-  },
-  {
-    title: 'Register',
-    logoPath: '/assets/icons/add-circle-filled.svg',
-    button: (
-      <Button variant="soft" disabled>
-        Comming Soon
-      </Button>
-    ),
-    description: `Link your
-                  2d & 3D avatars to 
-                  NFT Contracts`,
-  },
-  {
-    title: 'Review',
-    logoPath: '/assets/icons/check-circle-filled.svg',
-    button: <Button variant="soft">Visit Dashboard</Button>,
-    description: `Emulate your avatars
-                  as if they are on
-                  MYTY Metaverse apps`,
-  },
-];
-
 const Title = styled(Typography)``;
 const Description = styled(Typography)``;
 
 const MYTYStudioHome = () => {
+  const { push } = useRouter();
+  const CARD_WITH_BUTTONS: CardWithButtonProps[] = useMemo(
+    () => [
+      {
+        title: 'Create',
+        logoPath: '/assets/icons/brush-filled.svg',
+        button: (
+          <Button variant="soft" endIcon={<Iconify icon="eva:external-link-fill" />}>
+            Learn How
+          </Button>
+        ),
+        description: `Learn how to create
+                  2D &  3D avatars
+                  for MYTY Metaverse`,
+      },
+      {
+        title: 'Register',
+        logoPath: '/assets/icons/add-circle-filled.svg',
+        button: (
+          <Button variant="soft" disabled>
+            Comming Soon
+          </Button>
+        ),
+        description: `Link your
+                    2d & 3D avatars to 
+                    NFT Contracts`,
+      },
+      {
+        title: 'Review',
+        logoPath: '/assets/icons/check-circle-filled.svg',
+        button: (
+          <Button variant="soft" onClick={() => push('/dashboard')}>
+            Visit Dashboard
+          </Button>
+        ),
+        description: `Emulate your avatars
+                    as if they are on
+                    MYTY Metaverse apps`,
+      },
+    ],
+    [push]
+  );
+
   const isDesktop = useResponsive('up', 'md');
   const isXS = useResponsive('down', 'sm');
   return (

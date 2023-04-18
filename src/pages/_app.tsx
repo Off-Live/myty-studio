@@ -1,6 +1,3 @@
-// i18n
-import '../locales/i18n';
-
 // scroll bar
 import 'simplebar-react/dist/simplebar.min.css';
 
@@ -41,8 +38,6 @@ import { store } from '../redux/store';
 import createEmotionCache from '../utils/createEmotionCache';
 // theme
 import ThemeProvider from '../theme';
-// locales
-import ThemeLocalization from '../locales';
 // components
 import { StyledChart } from '../components/chart';
 import ProgressBar from '../components/progress-bar';
@@ -79,13 +74,11 @@ export default function MyApp(props: MyAppProps) {
                 <MotionLazyContainer>
                   <ThemeProvider>
                     <ThemeSettings>
-                      <ThemeLocalization>
-                        <SnackbarProvider>
-                          <StyledChart />
-                          <ProgressBar />
-                          {getLayout(<Component {...pageProps} />)}
-                        </SnackbarProvider>
-                      </ThemeLocalization>
+                      <SnackbarProvider>
+                        <StyledChart />
+                        <ProgressBar />
+                        {getLayout(<Component {...pageProps} />)}
+                      </SnackbarProvider>
                     </ThemeSettings>
                   </ThemeProvider>
                 </MotionLazyContainer>

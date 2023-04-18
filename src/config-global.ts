@@ -1,6 +1,3 @@
-// routes
-import { PATH_DASHBOARD } from './routes/paths';
-
 // API
 // ----------------------------------------------------------------------
 
@@ -25,11 +22,6 @@ export const AUTH0_API = {
   clientId: process.env.AUTH0_CLIENT_ID,
   domain: process.env.AUTH0_DOMAIN,
 };
-
-export const MAP_API = process.env.MAPBOX_API;
-
-// ROOT PATH AFTER LOGIN SUCCESSFUL
-export const PATH_AFTER_LOGIN = PATH_DASHBOARD.general.app; // as '/dashboard/app'
 
 // LAYOUT
 // ----------------------------------------------------------------------

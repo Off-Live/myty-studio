@@ -1,9 +1,5 @@
-// @mui
 import { alpha } from '@mui/material/styles';
-//
 import palette from './palette';
-
-// ----------------------------------------------------------------------
 
 interface CustomShadowOptions {
   z1: string;
@@ -38,9 +34,7 @@ declare module '@mui/material/styles' {
 // ----------------------------------------------------------------------
 
 const themeColor = palette('light');
-
 const LIGHT_MODE = themeColor.grey[500];
-
 const DARK_MODE = themeColor.common.black;
 
 function createShadow(color: string) {

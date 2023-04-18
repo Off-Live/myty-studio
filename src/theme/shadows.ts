@@ -1,14 +1,8 @@
-// @mui
 import { alpha, Shadows } from '@mui/material/styles';
-//
 import palette from './palette';
 
-// ----------------------------------------------------------------------
-
 const themeColor = palette('light');
-
 const LIGHT_MODE = themeColor.grey[500];
-
 const DARK_MODE = themeColor.common.black;
 
 function createShadow(color: string): Shadows {

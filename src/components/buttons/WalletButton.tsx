@@ -20,7 +20,7 @@ const WalletButton = (props: ConnectButtonProps) => (
         account &&
         chain &&
         (!authenticationStatus || authenticationStatus === 'authenticated');
-
+      const { chainStatus, showBalance } = props;
       return (
         <div
           {...(!ready && {
@@ -57,8 +57,7 @@ const WalletButton = (props: ConnectButtonProps) => (
                   type="button"
                 >
                   {chain.hasIcon &&
-                    (props.chainStatus?.valueOf() === 'full' ||
-                      props.chainStatus?.valueOf() === 'icon') && (
+                    (chainStatus?.valueOf() === 'full' || chainStatus?.valueOf() === 'icon') && (
                       <div
                         style={{
                           background: chain.iconBackground,
@@ -83,7 +82,7 @@ const WalletButton = (props: ConnectButtonProps) => (
 
                 <Button onClick={openAccountModal} type="button" variant="outlined">
                   {account.displayName}
-                  {account.displayBalance && props.showBalance?.valueOf()
+                  {account.displayBalance && showBalance?.valueOf()
                     ? ` (${account.displayBalance})`
                     : ''}
                 </Button>
