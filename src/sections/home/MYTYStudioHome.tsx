@@ -74,12 +74,30 @@ const MYTYStudioHome = () => {
   return (
     <StyledRoot>
       <Container>
-        <Grid container justifyContent="space-between">
+        <Grid container justifyContent="space-between" pt={10}>
           <Grid item xs={isDesktop ? 7.5 : 12}>
             <Stack spacing={2}>
               <Stack spacing={1}>
-                <Title variant="h3">Supercharge Your Avatar Across Metaverses</Title>
-                <Description variant="body1">
+                <Stack spacing={1} direction="row">
+                  <Title
+                    variant="h3"
+                    sx={{
+                      color: 'primary.main',
+                    }}
+                  >
+                    Supercharge
+                  </Title>
+                  <Title variant="h3">Your Avatar Across</Title>
+                  <Title
+                    variant="h3"
+                    sx={{
+                      color: 'other.block',
+                    }}
+                  >
+                    Metaverses
+                  </Title>
+                </Stack>
+                <Description variant="body1" align="center" sx={{ color: 'text.secondary' }}>
                   You can unlock the potential of your avatars by registering 2D and 3D avatars on
                   MYTY Studio today. This will empower your avatars to thrive across a variety of
                   MYTY metaverses with advanced functionality and compatibility. Join the Metaverse
