@@ -1,6 +1,13 @@
 import { alpha } from '@mui/material/styles';
 
-export type ColorSchema = 'primary' | 'secondary' | 'info' | 'success' | 'warning' | 'error';
+export type ColorSchema =
+  | 'primary'
+  | 'secondary'
+  | 'info'
+  | 'success'
+  | 'warning'
+  | 'error'
+  | 'other';
 
 declare module '@mui/material/styles/createPalette' {
   interface TypeBackground {
@@ -85,6 +92,10 @@ const ERROR = {
   contrastText: '#FFFFFF',
 };
 
+const OTHER = {
+  block: '#7B61FF',
+};
+
 const COMMON = {
   common: { black: '#000000', white: '#FFFFFF' },
   primary: PRIMARY,
@@ -94,6 +105,7 @@ const COMMON = {
   warning: WARNING,
   error: ERROR,
   grey: GREY,
+  other: OTHER,
   divider: alpha(GREY[500], 0.24),
   action: {
     hover: alpha(GREY[500], 0.08),

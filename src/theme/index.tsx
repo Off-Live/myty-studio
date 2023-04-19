@@ -23,6 +23,15 @@ export default function ThemeProvider({ children }: Props) {
 
   const themeOptions: ThemeOptions = useMemo(
     () => ({
+      breakpoints: {
+        values: {
+          xs: 0,
+          sm: 600,
+          md: 904,
+          lg: 1240,
+          xl: 1440,
+        },
+      },
       palette: palette(themeMode),
       typography,
       shape: { borderRadius: 8 },
