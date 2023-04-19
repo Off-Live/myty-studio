@@ -51,34 +51,36 @@ const WalletButton = (props: ConnectButtonProps) => (
 
             return (
               <div style={{ display: 'flex', gap: 12 }}>
-                <Button
-                  onClick={openChainModal}
-                  style={{ display: 'flex', alignItems: 'center' }}
-                  type="button"
-                >
-                  {chain.hasIcon &&
-                    (chainStatus?.valueOf() === 'full' || chainStatus?.valueOf() === 'icon') && (
-                      <div
-                        style={{
-                          background: chain.iconBackground,
-                          width: 12,
-                          height: 12,
-                          borderRadius: 999,
-                          overflow: 'hidden',
-                          marginRight: 4,
-                        }}
-                      >
-                        {chain.iconUrl && (
-                          <img
-                            alt={chain.name ?? 'Chain icon'}
-                            src={chain.iconUrl}
-                            style={{ width: 12, height: 12 }}
-                          />
-                        )}
-                      </div>
-                    )}
-                  {chain.name}
-                </Button>
+                {chainStatus?.valueOf() !== 'none' && (
+                  <Button
+                    onClick={openChainModal}
+                    style={{ display: 'flex', alignItems: 'center' }}
+                    type="button"
+                  >
+                    {chain.hasIcon &&
+                      (chainStatus?.valueOf() === 'full' || chainStatus?.valueOf() === 'icon') && (
+                        <div
+                          style={{
+                            background: chain.iconBackground,
+                            width: 12,
+                            height: 12,
+                            borderRadius: 999,
+                            overflow: 'hidden',
+                            marginRight: 4,
+                          }}
+                        >
+                          {chain.iconUrl && (
+                            <img
+                              alt={chain.name ?? 'Chain icon'}
+                              src={chain.iconUrl}
+                              style={{ width: 12, height: 12 }}
+                            />
+                          )}
+                        </div>
+                      )}
+                    {chain.name}
+                  </Button>
+                )}
 
                 <Button onClick={openAccountModal} type="button" variant="outlined">
                   {account.displayName}
