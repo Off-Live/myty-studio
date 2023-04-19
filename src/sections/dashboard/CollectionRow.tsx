@@ -9,6 +9,7 @@ import {
   Menu,
   MenuItem,
   styled,
+  Link,
 } from '@mui/material';
 import { useCallback, useState } from 'react';
 import { AssetCollectionItems } from 'src/@types/assetCollection';
@@ -16,6 +17,8 @@ import Iconify from 'src/components/iconify/Iconify';
 import Label from 'src/components/label/Label';
 import TextMathLength from 'src/components/text-max-length/TextMaxLength';
 import { displayTokensToString } from 'src/utils/display';
+import { PATH_PAGE } from 'src/routes/paths';
+import { chainIconMap, compatiblityTooltipMap } from './dashboard-config';
 
 type CollectionDashboardRowProp = {
   row: AssetCollectionItems;
@@ -25,7 +28,7 @@ const MENU_ITEMS = [
   {
     title: 'Review Avatar',
     iconifyPath: 'ic:round-videocam',
-    clickPath: '/',
+    clickPath: PATH_PAGE.avatarviewer,
   },
   {
     title: 'Update Version',
@@ -55,6 +58,9 @@ const CollectionDashboardRow = ({ row }: CollectionDashboardRowProp) => {
 
   return (
     <TableRow key={`${row.avatarName}-${row.version}`}>
+      <TableCellDefaultCursor sx={{ p: 0, pl: 2 }}>
+        {chainIconMap[row.chain]}
+      </TableCellDefaultCursor>
       <TableCellDefaultCursor>
         <Stack direction="row" spacing={2}>
           <Box component="img" src="/assets/sample-avatar.svg" style={{ width: 40, height: 40 }} />
@@ -81,23 +87,27 @@ const CollectionDashboardRow = ({ row }: CollectionDashboardRowProp) => {
           </Typography>
         </Tooltip>
       </TableCellDefaultCursor>
-      <TableCellDefaultCursor>
-        <Tooltip title={displayTokensToString(row.supportedTokenId)} arrow>
-          <Typography variant="inherit" sx={{ width: 'fit-content' }}>
-            {row.supportedTokenId.length}
-          </Typography>
-        </Tooltip>
+      <TableCellDefaultCursor align="right">
+        <Box sx={{ display: 'flex', justifyContent: 'right' }}>
+          <Tooltip title={displayTokensToString(row.supportedTokenId)} arrow>
+            <Typography variant="inherit" sx={{ width: 'fit-content' }}>
+              {row.supportedTokenId.length}
+            </Typography>
+          </Tooltip>
+        </Box>
       </TableCellDefaultCursor>
       <TableCellDefaultCursor>{row.createdDate}</TableCellDefaultCursor>
-      <TableCell>
-        <Stack direction="row" spacing={1}>
+      <TableCellDefaultCursor>
+        <Stack direction="row" spacing={1} justifyContent="center">
           {row.compatiblity.map((tag) => (
-            <Label variant="soft" color="info">
-              {tag}
-            </Label>
+            <Tooltip title={compatiblityTooltipMap[tag]} arrow placement="top">
+              <Label variant="soft" color="info">
+                <Box>{tag}</Box>
+              </Label>
+            </Tooltip>
           ))}
         </Stack>
-      </TableCell>
+      </TableCellDefaultCursor>
       <TableCell>
         <Label variant="soft" color="secondary">
           {row.format}
@@ -110,12 +120,14 @@ const CollectionDashboardRow = ({ row }: CollectionDashboardRowProp) => {
         <Menu open={Boolean(isMenuOpen)} anchorEl={isMenuOpen} onClick={handleClose}>
           {MENU_ITEMS.map((item) => (
             <MenuItem key={item.title} disabled={item.disable}>
-              <Stack direction="row" spacing={1}>
-                {item.iconifyPath && (
-                  <Iconify icon={item.iconifyPath} sx={{ width: 24, height: 24 }} />
-                )}
-                <Typography variant="inherit">{item.title}</Typography>
-              </Stack>
+              <Link href={item.clickPath} color="inherit" target="_blank" rel="noopener">
+                <Stack direction="row" spacing={1}>
+                  {item.iconifyPath && (
+                    <Iconify icon={item.iconifyPath} sx={{ width: 24, height: 24 }} />
+                  )}
+                  <Typography variant="inherit">{item.title}</Typography>
+                </Stack>
+              </Link>
             </MenuItem>
           ))}
         </Menu>

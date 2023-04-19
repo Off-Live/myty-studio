@@ -15,17 +15,19 @@ export const PATH_AUTH = {
   registerUnprotected: path(ROOTS_AUTH, '/register-unprotected'),
   resetPassword: path(ROOTS_AUTH, '/reset-password'),
   newPassword: path(ROOTS_AUTH, '/new-password'),
+  login: path(ROOTS_AUTH, '/login'),
 };
 
 export const PATH_PAGE = {
   page403: '/403',
   page404: '/404',
   page500: '/500',
-
+  faqs: '/',
   home: '/',
   registration: '/registration',
   dashboard: '/dashboard',
   documentation: '/documentation',
+  avatarviewer: 'https://viewer.myty.space/',
 };
 
 export const PATH_DOCS = {
