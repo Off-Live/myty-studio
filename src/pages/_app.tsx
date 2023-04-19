@@ -31,7 +31,7 @@ import { Provider as ReduxProvider } from 'react-redux';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 // redux
-import RainbowWalletProvider from 'src/wallet/RainbowWalletProvider';
+import RainbowWalletProvider from 'src/components/wallet/RainbowWalletProvider';
 import { SessionProvider } from 'next-auth/react';
 import { store } from '../redux/store';
 // utils

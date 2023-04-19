@@ -64,7 +64,7 @@ export default function Header() {
 
           {isDesktop && <NavDesktop isOffset={false} data={navConfig} />}
 
-          <WalletButton showBalance={false} chainStatus="name" />
+          <WalletButton showBalance={false} chainStatus="none" />
 
           {!isDesktop && <NavMobile isOffset={isOffset} data={navConfig} />}
         </Container>

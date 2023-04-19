@@ -1,4 +1,4 @@
-import { Box, Card, Stack, Typography } from '@mui/material';
+import { Card, Stack, Typography } from '@mui/material';
 import { styled } from '@mui/system';
 import React from 'react';
 import Image from 'src/components/image/Image';
