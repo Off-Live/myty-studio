@@ -52,31 +52,27 @@ export const ICON = {
 
 export const SOCIALS = [
   {
-    value: 'facebook',
-    name: 'FaceBook',
-    icon: 'eva:facebook-fill',
-    color: '#1877F2',
-    path: '',
-  },
-  {
-    value: 'instagram',
-    name: 'Instagram',
-    icon: 'ant-design:instagram-filled',
-    color: '#E02D69',
-    path: '',
-  },
-  {
-    value: 'linkedin',
-    name: 'Linkedin',
-    icon: 'eva:linkedin-fill',
-    color: '#007EBB',
-    path: '',
-  },
-  {
     value: 'twitter',
     name: 'Twitter',
-    icon: 'eva:twitter-fill',
-    color: '#00AAEC',
+    icon: 'assets/icons/social-media/twitter.svg',
     path: 'https://twitter.com/myty_official?s=20',
+  },
+  {
+    value: 'discord',
+    name: 'Discord',
+    icon: 'assets/icons/social-media/discord-block.svg',
+    path: 'https://discord.com/invite/myty',
+  },
+  {
+    value: 'mirror-xyz',
+    name: 'Mirror.xyz',
+    icon: 'assets/icons/social-media/mirror-xyz.svg',
+    path: 'https://mirror.xyz/mytyavatar.eth',
+  },
+  {
+    value: 'gitbook',
+    name: 'Gitbook',
+    icon: 'assets/icons/social-media/gitbook.svg',
+    path: 'https://myty.gitbook.io',
   },
 ];
