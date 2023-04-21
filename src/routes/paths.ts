@@ -25,6 +25,9 @@ export const PATH_PAGE = {
   faqs: '/',
   home: '/',
   registration: '/registration',
+  registration_avatar2d: '/registration/avatar2d',
+  registration_avatar3d: '/registration/avatar3d',
+
   dashboard: '/dashboard',
   documentation: '/documentation',
   avatarviewer: 'https://viewer.myty.space/',
