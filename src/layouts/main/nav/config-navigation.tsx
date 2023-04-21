@@ -13,8 +13,6 @@ const navConfig: NavItemProps[] = [
   {
     title: 'Registration',
     path: PATH_PAGE.registration,
-    tooltipText: 'Coming Soon!',
-    disable: true,
   },
   {
     title: 'Dashboard',
