@@ -1,14 +1,10 @@
-// next
-import NextLink from 'next/link';
-import { useRouter } from 'next/router';
 // @mui
-import { Box, Grid, Link, Stack, Divider, Container, Typography, IconButton } from '@mui/material';
+import { Box, Link, Stack, Divider, Container, Typography, IconButton } from '@mui/material';
 // components
 import MYTYStudioLogo from 'src/components/logo/MYTYStudioLogo';
 import { SOCIALS } from 'src/config-global';
 import useResponsive from 'src/hooks/useResponsive';
 import Image from 'src/components/image/Image';
-import Iconify from '../../components/iconify';
 
 // ----------------------------------------------------------------------
 
@@ -63,7 +59,7 @@ export default function Footer() {
             {isDesktop && (
               <Stack direction="row" gap={2.5}>
                 {SOCIALS.map((social) => (
-                  <Link href={social.path}>
+                  <Link href={social.path} target="_blank">
                     <Image src={social.icon} sx={{ widows: 24, height: 24 }} />
                   </Link>
                 ))}
