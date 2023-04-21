@@ -18,7 +18,10 @@ export default function useActiveLink(path: string, deep = true): ReturnType {
     (!checkPath && pathname === currentPath) || (!checkPath && asPath === currentPath);
 
   const deepActive =
-    (!checkPath && pathname.includes(currentPath)) || (!checkPath && asPath.includes(currentPath));
+    path === '/'
+      ? pathname === path
+      : (!checkPath && pathname.includes(currentPath)) ||
+        (!checkPath && asPath.includes(currentPath));
 
   return {
     active: deep ? deepActive : normalActive,

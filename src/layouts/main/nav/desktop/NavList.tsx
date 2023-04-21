@@ -21,7 +21,7 @@ export default function NavList({ item, isOffset }: NavListProps) {
   const { pathname } = useRouter();
   const [openMenu, setOpenMenu] = useState(false);
   const { path, children } = item;
-  const { active, isExternalLink } = useActiveLink(path, false);
+  const { active, isExternalLink } = useActiveLink(path, true);
 
   useEffect(() => {
     if (openMenu) {
