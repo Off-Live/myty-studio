@@ -1,9 +1,10 @@
 import Image from 'next/image';
 import { useState } from 'react';
 import checkingImage from 'public/assets/images/registration/avatar-checking.svg';
-import { Box, Button, Checkbox, CssBaseline, Stack, Typography, styled } from '@mui/material';
+import { Box, Button, Stack, Typography, styled } from '@mui/material';
 import Link from 'next/link';
 import { PATH_PAGE } from 'src/routes/paths';
+import { LinkWrapper } from 'src/components/link';
 import { StyledCardBox } from './styles';
 
 // ------------------
@@ -13,12 +14,6 @@ const ImageChecking = styled(Image)`
   height: 160;
 `;
 
-const LinkWrapper = styled(Link)`
-  text-decoration: none;
-  :visited {
-    color: inherit;
-  }
-`;
 // ------------------
 
 export type RegistrationAvatar2DTestAvatarProps = {
@@ -35,7 +30,7 @@ const RegistrationAvatar2DTestAvatar = ({
     <Box
       sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}
     >
-      <Stack sx={{ gap: 5 }}>
+      <Stack sx={{ gap: 5, alignContent: 'center' }}>
         <LinkWrapper
           href={PATH_PAGE.avatarviewer}
           target="_blank"
@@ -62,7 +57,7 @@ const RegistrationAvatar2DTestAvatar = ({
             variant="outlined"
             size="large"
             color="inherit"
-            sx={{ width: 134, height: 48 }}
+            sx={{ width: 134, height: 48, color: 'action.disabled' }}
             onClick={handleBack}
           >
             Back
