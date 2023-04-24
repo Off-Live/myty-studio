@@ -1,13 +1,6 @@
 import { alpha } from '@mui/material/styles';
 
-export type ColorSchema =
-  | 'primary'
-  | 'secondary'
-  | 'info'
-  | 'success'
-  | 'warning'
-  | 'error'
-  | 'other';
+export type ColorSchema = 'primary' | 'secondary' | 'info' | 'success' | 'warning' | 'error';
 
 declare module '@mui/material/styles/createPalette' {
   interface TypeBackground {
