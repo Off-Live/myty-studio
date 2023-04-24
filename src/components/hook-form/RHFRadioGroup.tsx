@@ -10,12 +10,17 @@ import {
   RadioGroupProps,
   FormControlLabel,
 } from '@mui/material';
+import { arraysEqual } from 'src/utils/arraysEqual';
 
 // ----------------------------------------------------------------------
 
 type Props = RadioGroupProps & {
   name: string;
-  options: { label: string; value: any }[];
+  options: {
+    label: string;
+    value: any;
+    icons?: { active: React.ReactNode; inActive: React.ReactNode };
+  }[];
   label?: string;
   spacing?: number;
   helperText?: React.ReactNode;
@@ -51,8 +56,13 @@ export default function RHFRadioGroup({
               <FormControlLabel
                 key={option.value}
                 value={option.value}
-                control={<Radio />}
+                control={<Radio checkedIcon={option.icons?.active} icon={option.icons?.inActive} />}
                 label={option.label}
+                checked={
+                  Array.isArray(field.value)
+                    ? arraysEqual(field.value.slice().sort(), option.value.slice().sort())
+                    : field.value === option.value
+                }
                 sx={{
                   '&:not(:last-of-type)': {
                     mb: spacing || 0,
