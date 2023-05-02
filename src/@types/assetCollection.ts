@@ -19,4 +19,5 @@ export type AssetCollectionItems = {
   compatiblity: AvatarCompatibility[];
   format: string;
   thumbnailImage?: string;
+  viewerURL?: string;
 };
