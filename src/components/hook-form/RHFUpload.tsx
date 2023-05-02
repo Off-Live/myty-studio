@@ -3,7 +3,7 @@ import { useFormContext, Controller } from 'react-hook-form';
 // @mui
 import { FormHelperText } from '@mui/material';
 //
-import { UploadAvatar, Upload, UploadBox, UploadProps } from '../upload';
+import { UploadAvatar, Upload, UploadBox, UploadProps, UploadAsset } from '../upload';
 
 // ----------------------------------------------------------------------
 
@@ -53,7 +53,23 @@ export function RHFUploadBox({ name, ...other }: Props) {
       name={name}
       control={control}
       render={({ field, fieldState: { error } }) => (
-        <UploadBox files={field.value} error={!!error} {...other} />
+        <UploadBox file={field.value} error={!!error} {...other} />
+      )}
+    />
+  );
+}
+
+// ----------------------------------------------------------------------
+
+export function RHFUploadAsset({ name, ...other }: Props) {
+  const { control } = useFormContext();
+
+  return (
+    <Controller
+      name={name}
+      control={control}
+      render={({ field, fieldState: { error } }) => (
+        <UploadAsset file={field.value} error={!!error} {...other} />
       )}
     />
   );
