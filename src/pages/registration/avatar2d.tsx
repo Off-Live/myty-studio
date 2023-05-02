@@ -22,13 +22,14 @@ import {
 import RegistrationAvatar2DTestAvatar from 'src/sections/registration/avatar2D/RegistrationAvatar2DTestAvatar';
 import { RegistrationAvatar2DStep } from 'src/sections/registration/avatar2D/types';
 import { StyledRoot } from 'src/sections/styles/StyledRoot';
-import is from 'date-fns/esm/locale/is/index.js';
 
 // -----------------------------------
-type IFormValuesProps = {
+export type IFormValuesProps = {
   chain: SupportedChain;
   creator: SupportAddress;
   fileName: string;
+  unitypackageFile: File | null;
+  assetbundleFile?: File | null;
   avatarName: string;
   nftContractAddress: SupportAddress;
   compatibility: AvatarType;
@@ -47,6 +48,7 @@ export default function Registration2DAvatar() {
     chain: Yup.string().required('Chain is required'),
     creator: Yup.string().required('Creator is required'),
     fileName: Yup.string().required('File name is required'),
+    unitypackageFile: Yup.mixed().required('Unitypackage is required'),
     avatarName: Yup.string().required('Avatar name is required'),
     nftContractAddress: Yup.string().required('NFT contract address is required'),
     compatibility: Yup.string().required('Compatibility is required'),
@@ -57,6 +59,8 @@ export default function Registration2DAvatar() {
     chain: 'Ethereum',
     creator: session.data?.user?.email || '',
     fileName: 'test.unitypackage',
+    unitypackageFile: null,
+    assetbundleFile: null,
     avatarName: '',
     nftContractAddress: '',
     compatibility: '2D',
@@ -71,8 +75,13 @@ export default function Registration2DAvatar() {
   const {
     handleSubmit,
     reset,
+    setValue,
+    getValues,
+    watch,
     formState: { isSubmitting, isValid, isSubmitSuccessful },
   } = methods;
+
+  // -----------------------------------
 
   const onSubmit = useCallback(
     async (data: IFormValuesProps) => {
@@ -99,6 +108,35 @@ export default function Registration2DAvatar() {
     [setActiveStep]
   );
 
+  const handleDrop = useCallback(
+    (formName: 'unitypackageFile' | 'assetbundleFile') => (acceptedFiles: File[]) => {
+      const file = acceptedFiles[0];
+      const newFile = Object.assign(file, {
+        preview: URL.createObjectURL(file),
+      });
+      if (newFile) {
+        setValue(formName, newFile, { shouldValidate: true });
+      }
+      if (formName === 'unitypackageFile')
+        setValue('fileName', newFile.name, { shouldValidate: true });
+    },
+    [setValue]
+  );
+
+  const handleDelete = useCallback(
+    (formName: 'unitypackageFile' | 'assetbundleFile') => () => {
+      setValue(formName, null, { shouldValidate: true });
+    },
+    [setValue]
+  );
+
+  const getFormValue = useCallback(
+    (formName: keyof IFormValuesProps) => getValues(formName),
+    [getValues, watch()]
+  );
+
+  // -----------------------------------
+
   const registrationAvatar2DPutMetadataProps = useMemo(
     () => ({
       handleBack,
@@ -108,22 +146,46 @@ export default function Registration2DAvatar() {
     [handleBack, isSubmitting, isValid]
   );
 
+  const RegistrationAvatar2DTestAvatarProps = useMemo(
+    () => ({
+      handleBack,
+      handleNext,
+    }),
+    [handleBack, handleNext]
+  );
+
+  const RegistraionAvatar2DUploadProps = useMemo(
+    () => ({
+      handleNext,
+      handleDrop,
+      handleDelete,
+      getFormValue,
+    }),
+    [handleNext, handleDrop, handleDelete, getFormValue]
+  );
+
+  // -----------------------------------
+
   const steps: RegistrationAvatar2DStep[] = useMemo(
     () => [
       {
         label: 'Upload',
-        content: <RegistraionAvatar2DUpload handleNext={handleNext} />,
+        content: <RegistraionAvatar2DUpload {...RegistraionAvatar2DUploadProps} />,
       },
       {
         label: 'Test Avatar',
-        content: <RegistrationAvatar2DTestAvatar handleBack={handleBack} handleNext={handleNext} />,
+        content: <RegistrationAvatar2DTestAvatar {...RegistrationAvatar2DTestAvatarProps} />,
       },
       {
         label: 'Put Metadata',
         content: <RegistrationAvatar2DPutMetadata {...registrationAvatar2DPutMetadataProps} />,
       },
     ],
-    [handleBack, handleNext, registrationAvatar2DPutMetadataProps]
+    [
+      RegistraionAvatar2DUploadProps,
+      RegistrationAvatar2DTestAvatarProps,
+      registrationAvatar2DPutMetadataProps,
+    ]
   );
   return (
     <AuthGuard>
