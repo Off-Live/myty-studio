@@ -20,15 +20,18 @@ import { displayTokensToString } from 'src/utils/display';
 import { PATH_PAGE } from 'src/routes/paths';
 import { chainIconMap, compatiblityTooltipMap } from './dashboard-config';
 
-type CollectionDashboardRowProp = {
-  row: AssetCollectionItems;
-};
+// --------------------------------------------
+type MENU_ITEMS_TITLES = 'Review Avatar' | 'Update Version' | 'Grant Official';
 
-const MENU_ITEMS = [
+const MENU_ITEMS: {
+  title: MENU_ITEMS_TITLES;
+  iconifyPath: string;
+  clickPath?: string;
+  disable?: boolean;
+}[] = [
   {
     title: 'Review Avatar',
     iconifyPath: 'ic:round-videocam',
-    clickPath: PATH_PAGE.avatarviewer,
   },
   {
     title: 'Update Version',
@@ -43,6 +46,11 @@ const MENU_ITEMS = [
     disable: true,
   },
 ];
+// --------------------------------------------
+
+type CollectionDashboardRowProp = {
+  row: AssetCollectionItems;
+};
 
 const TableCellDefaultCursor = styled(TableCell)`
   cursor: default;
@@ -120,7 +128,16 @@ const CollectionDashboardRow = ({ row }: CollectionDashboardRowProp) => {
         <Menu open={Boolean(isMenuOpen)} anchorEl={isMenuOpen} onClick={handleClose}>
           {MENU_ITEMS.map((item) => (
             <MenuItem key={item.title} disabled={item.disable}>
-              <Link href={item.clickPath} color="inherit" target="_blank" rel="noopener">
+              <Link
+                href={
+                  item.title === 'Review Avatar'
+                    ? row.viewerURL || PATH_PAGE.avatarviewer
+                    : item.clickPath
+                }
+                color="inherit"
+                target="_blank"
+                rel="noopener"
+              >
                 <Stack direction="row" spacing={1}>
                   {item.iconifyPath && (
                     <Iconify icon={item.iconifyPath} sx={{ width: 24, height: 24 }} />
