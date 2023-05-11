@@ -12,9 +12,11 @@ export type AssetCollectionItems = {
   avatarName: string;
   creator: SupportAddress;
   collectionAdress: SupportAddress;
+  versionID?: string;
   version: string;
   linkedNFT: string;
-  supportedTokenId: TokenID[];
+  supportedTokenId?: TokenID[];
+  supportedTokenCount: number;
   createdDate: Date;
   compatiblity: AvatarCompatibility[];
   format: string;
