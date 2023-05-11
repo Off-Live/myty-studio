@@ -17,6 +17,7 @@ import Iconify from 'src/components/iconify/Iconify';
 import Label from 'src/components/label/Label';
 import TextMathLength from 'src/components/text-max-length/TextMaxLength';
 import { displayTokensToString } from 'src/utils/display';
+import { ReactJSXElement } from '@emotion/react/types/jsx-namespace';
 import { chainIconMap, compatiblityTooltipMap } from './dashboard-config';
 
 // --------------------------------------------
