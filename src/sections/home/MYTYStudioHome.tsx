@@ -113,7 +113,7 @@ const MYTYStudioHome = () => {
                 spacing={1}
               >
                 {CARD_WITH_BUTTONS.map((item) => (
-                  <CardWithButton {...item} />
+                  <CardWithButton {...item} key={item.title} />
                 ))}
               </Stack>
             </Stack>

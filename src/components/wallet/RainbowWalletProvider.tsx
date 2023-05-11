@@ -9,18 +9,18 @@ import {
   GetSiweMessageOptions,
   RainbowKitSiweNextAuthProvider,
 } from '@rainbow-me/rainbowkit-siwe-next-auth';
-
+//
 const { chains, provider } = configureChains([mainnet, polygon], [publicProvider()]);
 const { connectors } = getDefaultWallets({ appName: 'MYTY STUDIO', chains });
-
+//
 export const wagmiClient = createClient({ autoConnect: true, connectors, provider });
-
+//
 const getSiweMessageOptions: GetSiweMessageOptions = () => ({
   statement: `MYTY STUDIO`,
 });
 
 type RainbowWalletProviderProps = { children: JSX.Element };
-
+//
 const RainbowWalletProvider = ({ children }: RainbowWalletProviderProps): JSX.Element => (
   <WagmiConfig client={wagmiClient}>
     <RainbowKitSiweNextAuthProvider getSiweMessageOptions={getSiweMessageOptions}>

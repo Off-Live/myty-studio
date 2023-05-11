@@ -59,7 +59,7 @@ export default function Footer() {
             {isDesktop && (
               <Stack direction="row" gap={2.5}>
                 {SOCIALS.map((social) => (
-                  <Link href={social.path} target="_blank">
+                  <Link href={social.path} target="_blank" key={social.name}>
                     <Image src={social.icon} sx={{ widows: 24, height: 24 }} />
                   </Link>
                 ))}
