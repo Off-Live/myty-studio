@@ -11,13 +11,12 @@ import {
   styled,
   Link,
 } from '@mui/material';
-import { useCallback, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { AssetCollectionItems } from 'src/@types/assetCollection';
 import Iconify from 'src/components/iconify/Iconify';
 import Label from 'src/components/label/Label';
 import TextMathLength from 'src/components/text-max-length/TextMaxLength';
 import { displayTokensToString } from 'src/utils/display';
-import { PATH_PAGE } from 'src/routes/paths';
 import { chainIconMap, compatiblityTooltipMap } from './dashboard-config';
 
 // --------------------------------------------
@@ -58,17 +57,34 @@ const TableCellDefaultCursor = styled(TableCell)`
 
 const CollectionDashboardRow = ({ row }: CollectionDashboardRowProp) => {
   const [isMenuOpen, setIsMenuOpen] = useState<HTMLElement | null>(null);
+  //
   const handleClick = useCallback(
     (event: React.MouseEvent<HTMLElement>) => setIsMenuOpen(event.currentTarget),
     [setIsMenuOpen]
   );
   const handleClose = useCallback(() => setIsMenuOpen(null), []);
-
+  const wrapperTooltip = useCallback(
+    (supportedTokenId: string[] | undefined) =>
+      // eslint-disable-next-line react/no-unstable-nested-components
+      (wrappedNode: ReactJSXElement): React.ReactNode => {
+        if (supportedTokenId !== undefined) {
+          return (
+            <Tooltip title={displayTokensToString(supportedTokenId)} arrow>
+              {wrappedNode}
+            </Tooltip>
+          );
+        }
+        return wrappedNode;
+      },
+    []
+  );
+  //
   return (
     <TableRow key={`${row.avatarName}-${row.version}`}>
       <TableCellDefaultCursor sx={{ p: 0, pl: 2 }}>
         {chainIconMap[row.chain]}
       </TableCellDefaultCursor>
+      {/*  */}
       <TableCellDefaultCursor>
         <Stack direction="row" spacing={2}>
           <Box component="img" src="/assets/sample-avatar.svg" style={{ width: 40, height: 40 }} />
@@ -87,7 +103,9 @@ const CollectionDashboardRow = ({ row }: CollectionDashboardRowProp) => {
           </Stack>
         </Stack>
       </TableCellDefaultCursor>
+      {/*  */}
       <TableCellDefaultCursor>{row.version}</TableCellDefaultCursor>
+      {/*  */}
       <TableCellDefaultCursor>
         <Tooltip title={row.collectionAdress} arrow>
           <Typography variant="inherit" sx={{ width: 'fit-content' }}>
@@ -95,19 +113,22 @@ const CollectionDashboardRow = ({ row }: CollectionDashboardRowProp) => {
           </Typography>
         </Tooltip>
       </TableCellDefaultCursor>
+      {/*  */}
       <TableCellDefaultCursor align="right">
         <Box sx={{ display: 'flex', justifyContent: 'right' }}>
-          <Tooltip title={displayTokensToString(row.supportedTokenId)} arrow>
+          {wrapperTooltip(row.supportedTokenId)(
             <Typography variant="inherit" sx={{ width: 'fit-content' }}>
-              {row.supportedTokenId.length}
+              {row.supportedTokenCount}
             </Typography>
-          </Tooltip>
+          )}
         </Box>
       </TableCellDefaultCursor>
+      {/*  */}
       <TableCellDefaultCursor>{row.createdDate}</TableCellDefaultCursor>
+      {/*  */}
       <TableCellDefaultCursor>
         <Stack direction="row" spacing={1} justifyContent="center">
-          {row.compatiblity.map((tag) => (
+          {row.compatiblity?.map((tag) => (
             <Tooltip title={compatiblityTooltipMap[tag]} arrow placement="top">
               <Label variant="soft" color="info">
                 <Box>{tag}</Box>
@@ -116,11 +137,15 @@ const CollectionDashboardRow = ({ row }: CollectionDashboardRowProp) => {
           ))}
         </Stack>
       </TableCellDefaultCursor>
+      {/*  */}
       <TableCell>
-        <Label variant="soft" color="secondary">
-          {row.format}
-        </Label>
+        {row.format && (
+          <Label variant="soft" color="secondary">
+            {row.format}
+          </Label>
+        )}
       </TableCell>
+      {/*  */}
       <TableCell>
         <IconButton onClick={handleClick}>
           <Iconify icon="eva:more-vertical-fill" />
@@ -129,11 +154,7 @@ const CollectionDashboardRow = ({ row }: CollectionDashboardRowProp) => {
           {MENU_ITEMS.map((item) => (
             <MenuItem key={item.title} disabled={item.disable}>
               <Link
-                href={
-                  item.title === 'Review Avatar'
-                    ? row.viewerURL || PATH_PAGE.avatarviewer
-                    : item.clickPath
-                }
+                href={item.title === 'Review Avatar' ? row.viewerURL : item.clickPath}
                 color="inherit"
                 target="_blank"
                 rel="noopener"
