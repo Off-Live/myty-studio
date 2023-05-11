@@ -30,7 +30,7 @@ export const PATH_PAGE = {
 
   dashboard: '/dashboard',
   documentation: '/documentation',
-  avatarviewer: 'https://viewer.myty.space/',
+  avatarviewer: 'https://viewer.myty.space',
 };
 
 export const PATH_DOCS = {
