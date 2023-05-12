@@ -22,6 +22,8 @@ import {
 import RegistrationAvatar2DTestAvatar from 'src/sections/registration/avatar2D/RegistrationAvatar2DTestAvatar';
 import { RegistrationAvatar2DStep } from 'src/sections/registration/avatar2D/types';
 import { StyledRoot } from 'src/sections/styles/StyledRoot';
+import axios from 'axios';
+import { IAssetsPostParams } from '../api/registry/assets/types';
 
 // -----------------------------------
 export type IFormValuesProps = {
@@ -56,7 +58,7 @@ export default function Registration2DAvatar() {
   });
 
   const defaultFormValues: IFormValuesProps = {
-    chain: 'Ethereum',
+    chain: 'ethereum',
     creator: session.data?.user?.email || '',
     fileName: 'test.unitypackage',
     unitypackageFile: null,
@@ -86,11 +88,31 @@ export default function Registration2DAvatar() {
   const onSubmit = useCallback(
     async (data: IFormValuesProps) => {
       try {
-        // TODO
-        setTimeout(() => {
-          console.log('Submit data', data);
-        }, 2000);
-        reset();
+        const body: IAssetsPostParams = {
+          chain: data.chain,
+          nftCollectionAddress: data.nftContractAddress,
+          creatorAddress: data.creator,
+          name: data.avatarName,
+          kitVersion: 'v1.2.0', // For test
+          type: 'TYPE_UNITYPACKAGE',
+        };
+        const baseURL = process.env.NEXT_PUBLIC_NEXTAUTH_URL || '';
+        const presignedURLRes = await axios.post(`${baseURL}/api/registry/assets`, body);
+        if (presignedURLRes.status === 200) {
+          const presignedUrl = presignedURLRes.data.key;
+          const uploadRes = await axios.put(presignedUrl, data.unitypackageFile, {
+            headers: { 'Content-Type': '*/*' },
+          });
+          if (uploadRes.status === 200) {
+            console.log('done');
+
+            reset();
+          } else {
+            // TODO: when failure, how to handle?
+          }
+        } else {
+          // TODO: when failure, how to handle?
+        }
       } catch (error) {
         console.log('error', error);
       }
@@ -132,6 +154,7 @@ export default function Registration2DAvatar() {
 
   const getFormValue = useCallback(
     (formName: keyof IFormValuesProps) => getValues(formName),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [getValues, watch()]
   );
 
