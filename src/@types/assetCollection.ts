@@ -1,7 +1,7 @@
 import { ethereumAddress } from './wallet';
 
 export type SupportAddress = ethereumAddress;
-export type SupportedChain = 'Ethereum' | 'Polygon';
+export type SupportedChain = 'ethereum' | 'polygon';
 export type AvatarType = '2D' | '3D';
 export type AvatarCompatibility = '2D' | 'Head' | 'Body';
 export type TokenID = string;

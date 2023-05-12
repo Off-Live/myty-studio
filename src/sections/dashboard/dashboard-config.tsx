@@ -15,14 +15,14 @@ export const compatiblityTooltipMap: { [key in AvatarCompatibility]?: React.Reac
 };
 
 export const chainIconMap: { [key in SupportedChain]: React.ReactNode } = {
-  Ethereum: (
+  ethereum: (
     <Box
       component="img"
       src="/assets/icons/blockchain/ethereum-gray-icon.svg"
       style={{ width: 24, height: 24 }}
     />
   ),
-  Polygon: (
+  polygon: (
     <Box
       component="img"
       src="/assets/icons/blockchain/polygon-gray-icon.svg"

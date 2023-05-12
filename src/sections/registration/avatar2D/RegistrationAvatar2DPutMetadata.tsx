@@ -19,7 +19,7 @@ const SupportingChains: {
 }[] = [
   {
     label: 'Ethereum',
-    value: 'Ethereum',
+    value: 'ethereum',
     icons: {
       active: (
         <Image
@@ -37,7 +37,7 @@ const SupportingChains: {
   },
   {
     label: 'Polygon',
-    value: 'Polygon',
+    value: 'polygon',
     icons: {
       active: (
         <Image
