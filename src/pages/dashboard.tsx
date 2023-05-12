@@ -47,12 +47,15 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   //
   if (session?.user?.name) {
     const creatorAddress = (
-      devEnv === 'production' ? session!.user!.name : '0xDAFCe4AcC2703A24F29d1321AdAADF5768F54642'
+      devEnv === 'production' ? session!.user!.name : '0x82EAcBd9f498701029477e35054155861cbd3b04'
     ) as string;
     const versionQuery: IAssetCollections = { creatorAddress };
-    const response = await axios.get(`${process.env.NEXTAUTH_URL}/api/registry/assetCollections`, {
-      params: versionQuery,
-    });
+    const response = await axios.get(
+      `${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/api/registry/assetCollections`,
+      {
+        params: versionQuery,
+      }
+    );
     if (response.status === 200) {
       assetCollection.push(
         ...response.data.map((assetCollectionItem: AssetCollectionItems) => ({
@@ -79,8 +82,6 @@ Dashboard.getLayout = (page: React.ReactElement) => <MainLayout> {page} </MainLa
 type DashboardProps = InferGetServerSidePropsType<typeof getServerSideProps>;
 //
 export default function Dashboard({ assetCollection }: DashboardProps) {
-  console.log(assetCollection);
-
   return (
     <AuthGuard>
       <CollectionDashboard

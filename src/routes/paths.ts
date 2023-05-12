@@ -4,19 +4,19 @@ function path(root: string, sublink: string) {
   return `${root}${sublink}`;
 }
 
-const ROOTS_AUTH = '/auth';
+// const ROOTS_AUTH = '/auth';
 
 // ----------------------------------------------------------------------
 
-export const PATH_AUTH = {
-  root: ROOTS_AUTH,
-  register: path(ROOTS_AUTH, '/register'),
-  loginUnprotected: path(ROOTS_AUTH, '/login-unprotected'),
-  registerUnprotected: path(ROOTS_AUTH, '/register-unprotected'),
-  resetPassword: path(ROOTS_AUTH, '/reset-password'),
-  newPassword: path(ROOTS_AUTH, '/new-password'),
-  login: path(ROOTS_AUTH, '/login'),
-};
+// export const PATH_AUTH = {
+//   root: ROOTS_AUTH,
+//   register: path(ROOTS_AUTH, '/register'),
+//   loginUnprotected: path(ROOTS_AUTH, '/login-unprotected'),
+//   registerUnprotected: path(ROOTS_AUTH, '/register-unprotected'),
+//   resetPassword: path(ROOTS_AUTH, '/reset-password'),
+//   newPassword: path(ROOTS_AUTH, '/new-password'),
+//   login: path(ROOTS_AUTH, '/login'),
+// };
 
 export const PATH_PAGE = {
   page403: '/403',
@@ -27,7 +27,7 @@ export const PATH_PAGE = {
   registration: '/registration',
   registration_avatar2d: '/registration/avatar2d',
   registration_avatar3d: '/registration/avatar3d',
-
+  //
   dashboard: '/dashboard',
   documentation: '/documentation',
   avatarviewer: 'https://viewer.myty.space',

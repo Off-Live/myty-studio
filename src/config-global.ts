@@ -3,6 +3,7 @@
 // ----------------------------------------------------------------------
 
 export const HOST_API_KEY = process.env.HOST_API_KEY || '';
+export const HOST_BASE_URL = process.env.NEXT_PUBLIC_NEXTAUTH_URL || '';
 
 // LAYOUT
 // ----------------------------------------------------------------------

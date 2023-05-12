@@ -22,11 +22,11 @@ export const authOptions: NextAuthOptions = {
       async authorize(credentials, req: any) {
         try {
           const siwe = new SiweMessage(JSON.parse(credentials?.message || '{}'));
-          if (!process.env.NEXTAUTH_URL) {
+          if (!process.env.NEXT_PUBLIC_NEXTAUTH_URL) {
             console.log('there is no NEXTAUTH_URL in the env');
             return null;
           }
-          const nextAuthUrl = new URL(process.env.NEXTAUTH_URL);
+          const nextAuthUrl = new URL(process.env.NEXT_PUBLIC_NEXTAUTH_URL);
 
           const result = await siwe.verify({
             signature: credentials?.signature || '',

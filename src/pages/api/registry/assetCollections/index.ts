@@ -3,7 +3,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { AssetCollectionItems } from 'src/@types/assetCollection';
 import { IVersionQuery, IVersionReqContext } from '../versions/types';
 //
-const BASE_URL = process.env.NEXTAUTH_URL;
+const BASE_URL = process.env.NEXT_PUBLIC_NEXTAUTH_URL;
 //
 export type IAssetCollections = {
   creatorAddress: string;
