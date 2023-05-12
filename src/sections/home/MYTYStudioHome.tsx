@@ -68,9 +68,10 @@ const MYTYStudioHome = () => {
     ],
     [push]
   );
-
+  //
   const isDesktop = useResponsive('up', 'md');
   const isXS = useResponsive('down', 'sm');
+  //
   return (
     <StyledRoot>
       <Container>
