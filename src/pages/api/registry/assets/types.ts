@@ -1,4 +1,4 @@
-export type IAssetsRequestQuery = {
+export type IAssetsGetQuery = {
   chain?: string;
   nftCollectionAddress?: string;
   collectionId?: number;
@@ -17,4 +17,17 @@ export type IAsset = {
   tokenId: string;
   assetUri: string;
   tags: string[];
+};
+
+export type IAssetsPostParams = {
+  chain: string;
+  nftCollectionAddress: string;
+  creatorAddress: string;
+  name: string;
+  kitVersion: string;
+  type: 'TYPE_UNITYPACKAGE' | 'TYPE_MYTY' | 'TYPE_MYTYC' | string;
+};
+
+export type IAssetsPutResponse = {
+  key: string;
 };
